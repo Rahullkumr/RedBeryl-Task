@@ -1,0 +1,29 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+ENV/
+env/
+*.env
+
+# PyCharm settings
+.idea/
+*.iml
+*.iws
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache files
+*.cache
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook checkpoints (if applicable)
+.ipynb_checkpoints/
