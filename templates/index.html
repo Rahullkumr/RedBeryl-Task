@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Upload</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Upload Document</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label for="docType">Document Type:</label>
+      <select id="docType" name="docType" required>
+        <option value="aadhar">Aadhaar Card</option>
+        <option value="passport">Passport</option>
+        <option value="driving_license">Driving License</option>
+      </select>
+      
+      <label for="file">Choose File (PDF/Image):</label>
+      <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png" required />
+      
+      <button type="submit">Upload</button>
+    </form>
+    <p id="responseMessage"></p>
+  </div>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append("docType", document.getElementById("docType").value);
+      formData.append("file", document.getElementById("file").files[0]);
+
+      try {
+        const response = await fetch("/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        document.getElementById("responseMessage").innerText = result.message;
+      } catch (error) {
+        document.getElementById("responseMessage").innerText = "Error uploading file.";
+      }
+    });
+  </script>
+</body>
+</html>
